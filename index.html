@@ -364,9 +364,7 @@
         <div style="word-break:break-word;">
           zemexx.ru/zemelnye-uchastki/kashirskoe-shosse/novoe-rastunovo-/
         </div>
-        <div class="muted" style="margin-top:10px;">
-          *Изображения/рендеры/фото вставишь позже — в презентации есть плейсхолдеры.
-        </div>
+        <!-- Убрано примечание о плейсхолдерах, так как изображения вставлены -->
       </div>
     </aside>
 
@@ -534,9 +532,28 @@
             </div>
           </div>
 
-          <div class="ph" style="margin-top:14px;">
-            Место для “инфографики комплектации”
-            <small>иконки: септик / скважина / электрика / тёплый пол / отделка</small>
+          <!-- Инфографика комплектации -->
+          <div class="icons-grid" style="display:flex;flex-wrap:wrap;gap:20px;margin-top:20px;justify-content:center;">
+            <div style="flex:1 1 100px; text-align:center;">
+              <img src="septic.png" alt="Септик" style="width:60px;height:60px; object-fit:contain;">
+              <div class="muted" style="font-size:11px; margin-top:6px;">Септик</div>
+            </div>
+            <div style="flex:1 1 100px; text-align:center;">
+              <img src="well.png" alt="Скважина" style="width:60px;height:60px; object-fit:contain;">
+              <div class="muted" style="font-size:11px; margin-top:6px;">Скважина</div>
+            </div>
+            <div style="flex:1 1 100px; text-align:center;">
+              <img src="electricity.png" alt="Электрика" style="width:60px;height:60px; object-fit:contain;">
+              <div class="muted" style="font-size:11px; margin-top:6px;">Электрика</div>
+            </div>
+            <div style="flex:1 1 100px; text-align:center;">
+              <img src="warm_floor.png" alt="Тёплый пол" style="width:60px;height:60px; object-fit:contain;">
+              <div class="muted" style="font-size:11px; margin-top:6px;">Тёплый пол</div>
+            </div>
+            <div style="flex:1 1 100px; text-align:center;">
+              <img src="finishing.png" alt="Отделка" style="width:60px;height:60px; object-fit:contain;">
+              <div class="muted" style="font-size:11px; margin-top:6px;">Отделка</div>
+            </div>
           </div>
         `
       },
@@ -735,9 +752,20 @@
             </div>
           </div>
 
-          <div class="ph" style="margin-top:14px;">
-            Место для “баннеров”
-            <small>3–5 вариантов рекламных креативов (ты сделаешь картинки)</small>
+          <!-- Галерея рекламных креативов -->
+          <div class="banners-grid" style="display:flex;flex-wrap:wrap;gap:20px;margin-top:20px;">
+            <div style="flex:1 1 calc(50% - 10px);">
+              <img src="banner1.png" alt="Креатив 1" style="width:100%; border-radius:16px; object-fit:cover;">
+            </div>
+            <div style="flex:1 1 calc(50% - 10px);">
+              <img src="banner2.png" alt="Креатив 2" style="width:100%; border-radius:16px; object-fit:cover;">
+            </div>
+            <div style="flex:1 1 calc(50% - 10px);">
+              <img src="banner3.png" alt="Креатив 3" style="width:100%; border-radius:16px; object-fit:cover;">
+            </div>
+            <div style="flex:1 1 calc(50% - 10px);">
+              <img src="banner4.png" alt="Креатив 4" style="width:100%; border-radius:16px; object-fit:cover;">
+            </div>
           </div>
         `
       },
