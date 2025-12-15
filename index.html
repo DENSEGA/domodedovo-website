@@ -1,0 +1,927 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Инвест-презентация — 20 домов 99 м², Домодедово</title>
+  <meta name="description" content="Инвест-проект: строительство и продажа 20 каркасных домов 99 м² под ключ, Домодедовский район" />
+  <style>
+    :root{
+      /* Цветовая палитра обновлена под приятный салатовый оттенок */
+      --bg:#0f200e;
+      --bg2:#142e18;
+      --card:#16371c;
+      --text:#e6f5e1;
+      --muted:#a0caa5;
+      --accent:#7ccc6c;
+      --accent2:#a3d89a;
+      --ok:#34d399;
+      --warn:#f1c232;
+      --danger:#f08080;
+      --border:rgba(255,255,255,.08);
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --radius:18px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue";
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:var(--font);
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 20% 10%, rgba(167,139,250,.18), transparent 60%),
+        radial-gradient(1000px 600px at 80% 20%, rgba(125,211,252,.14), transparent 60%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      overflow:hidden;
+    }
+
+    /* Top bar */
+    .topbar{
+      position:fixed; left:0; right:0; top:0;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 18px;
+      z-index:50;
+      background: linear-gradient(180deg, rgba(11,15,23,.85), rgba(11,15,23,.25));
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid var(--border);
+    }
+    .brand{ display:flex; gap:12px; align-items:center; min-width:240px; }
+    .logo{
+      width:34px; height:34px; border-radius:12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 10px 30px rgba(125,211,252,.22);
+    }
+    .brand .t1{ font-weight:700; letter-spacing:.2px; font-size:14px; }
+    .brand .t2{ color:var(--muted); font-size:12px; margin-top:2px; }
+
+    .controls{ display:flex; gap:10px; align-items:center; }
+    .btn{
+      border:1px solid var(--border);
+      background: rgba(18,27,46,.55);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:14px;
+      cursor:pointer;
+      transition:.2s;
+      font-weight:600;
+      font-size:13px;
+      display:flex; gap:8px; align-items:center;
+      user-select:none;
+    }
+    .btn:hover{ transform: translateY(-1px); border-color: rgba(125,211,252,.35); }
+    .btn:active{ transform: translateY(0px); }
+    .kbd{
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono";
+      font-size:12px;
+      color:var(--muted);
+      border:1px solid var(--border);
+      padding:3px 8px;
+      border-radius:10px;
+      background: rgba(0,0,0,.20);
+    }
+
+    /* Layout */
+    .wrap{
+      height:100%;
+      padding-top:64px;
+      display:grid;
+      grid-template-columns: 320px 1fr;
+      gap:16px;
+    }
+
+    /* Sidebar */
+    .side{
+      padding:16px;
+      border-right:1px solid var(--border);
+      background: rgba(0,0,0,.10);
+      backdrop-filter: blur(8px);
+      overflow:auto;
+    }
+    .side h3{
+      margin:10px 0 12px;
+      font-size:12px;
+      color:var(--muted);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-weight:700;
+    }
+    .nav{
+      display:flex; flex-direction:column; gap:8px;
+    }
+    .nav a{
+      text-decoration:none;
+      color:var(--text);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 12px;
+      background: rgba(18,27,46,.42);
+      transition:.2s;
+      display:flex; justify-content:space-between; gap:10px;
+    }
+    .nav a:hover{ border-color: rgba(167,139,250,.35); transform: translateY(-1px); }
+    .nav a.active{
+      border-color: rgba(125,211,252,.55);
+      box-shadow: 0 10px 30px rgba(125,211,252,.12);
+      background: rgba(18,27,46,.72);
+    }
+    .nav .idx{
+      color:var(--muted);
+      font-size:12px;
+      min-width:30px;
+    }
+    .nav .ttl{
+      flex:1;
+      font-weight:700;
+      font-size:13px;
+      line-height:1.2;
+    }
+
+    /* Main slide */
+    .main{
+      padding:16px 20px 22px;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .slide{
+      height: calc(100% - 52px);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background: rgba(18,27,46,.55);
+      box-shadow: var(--shadow);
+      padding:26px;
+      overflow:auto;
+      position:relative;
+    }
+    .slide::before{
+      content:"";
+      position:absolute; inset:-1px;
+      border-radius: var(--radius);
+      pointer-events:none;
+      background: linear-gradient(135deg, rgba(125,211,252,.18), rgba(167,139,250,.12), transparent 60%);
+      mask: linear-gradient(#000, #000) content-box, linear-gradient(#000, #000);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      padding:1px;
+    }
+
+    .progress{
+      height:10px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      background: rgba(0,0,0,.18);
+      overflow:hidden;
+      margin-top:12px;
+    }
+    .bar{
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+    .meta{
+      display:flex; align-items:center; justify-content:space-between;
+      margin-top:10px;
+      color:var(--muted);
+      font-size:12px;
+    }
+
+    h1{
+      margin:0 0 10px;
+      font-size:34px;
+      line-height:1.1;
+      letter-spacing:.2px;
+    }
+    h2{
+      margin:0 0 14px;
+      font-size:26px;
+      line-height:1.15;
+    }
+    p{ margin: 10px 0; color: var(--text); font-size:15px; line-height:1.6; }
+    .muted{ color:var(--muted); }
+    .chips{ display:flex; flex-wrap:wrap; gap:8px; margin:12px 0 4px; }
+    .chip{
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.18);
+      padding:7px 10px;
+      border-radius:999px;
+      color: var(--text);
+      font-weight:650;
+      font-size:12px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:14px;
+      margin-top:14px;
+    }
+    .card{
+      grid-column: span 6;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background: rgba(0,0,0,.16);
+      padding:14px 14px 12px;
+    }
+    .card h4{ margin:0 0 8px; font-size:14px; letter-spacing:.2px; }
+    .list{ margin:0; padding-left:18px; color:var(--text); }
+    .list li{ margin:8px 0; line-height:1.45; }
+    .kpi{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap:12px;
+      margin-top:14px;
+    }
+    .kpi .box{
+      border:1px solid var(--border);
+      border-radius:16px;
+      background: rgba(0,0,0,.16);
+      padding:12px;
+    }
+    .kpi .v{ font-size:18px; font-weight:800; }
+    .kpi .l{ color:var(--muted); font-size:12px; margin-top:4px; }
+    .tbl{
+      width:100%;
+      border-collapse: separate;
+      border-spacing:0;
+      overflow:hidden;
+      border-radius:16px;
+      border:1px solid var(--border);
+      margin-top:12px;
+      background: rgba(0,0,0,.14);
+    }
+    .tbl th, .tbl td{
+      padding:12px 12px;
+      border-bottom:1px solid var(--border);
+      font-size:13px;
+      text-align:left;
+    }
+    .tbl th{ color: var(--muted); font-weight:800; letter-spacing:.06em; text-transform:uppercase; font-size:11px; }
+    .tbl tr:last-child td{ border-bottom:none; }
+    .right{ text-align:right; }
+    .note{
+      margin-top:14px;
+      border:1px dashed rgba(125,211,252,.35);
+      background: rgba(125,211,252,.07);
+      padding:12px 12px;
+      border-radius:16px;
+      color: var(--text);
+    }
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      border:1px solid var(--border);
+      padding:7px 10px;
+      border-radius:999px;
+      background: rgba(0,0,0,.18);
+      font-weight:750;
+      font-size:12px;
+      margin-right:8px;
+    }
+    .dot{ width:8px; height:8px; border-radius:99px; background: var(--ok); }
+
+    .hero{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:14px;
+      margin-top:12px;
+      align-items:stretch;
+    }
+    .ph{
+      border:1px dashed rgba(255,255,255,.22);
+      border-radius:16px;
+      background: rgba(0,0,0,.18);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:14px;
+      min-height:180px;
+      color: var(--muted);
+      text-align:center;
+      font-weight:700;
+    }
+    .ph small{ display:block; margin-top:6px; font-weight:600; opacity:.9; }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      body{ overflow:auto; }
+      .wrap{ grid-template-columns: 1fr; padding-top:64px; }
+      .side{ position:relative; border-right:none; border-bottom:1px solid var(--border); max-height:240px; }
+      .main{ overflow:visible; }
+      .slide{ height:auto; min-height: 70vh; }
+      .kpi{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .hero{ grid-template-columns: 1fr; }
+      .card{ grid-column: span 12; }
+    }
+
+    @media print{
+      body{ overflow:visible; background:#fff; color:#000; }
+      .topbar, .side, .progress, .meta{ display:none !important; }
+      .wrap{ grid-template-columns: 1fr; padding-top:0; }
+      .main{ padding:0; }
+      .slide{
+        box-shadow:none;
+        background:#fff;
+        border:1px solid #ddd;
+        height:auto;
+        page-break-after: always;
+      }
+      .slide::before{ display:none; }
+      .tbl{ border:1px solid #ddd; }
+      .tbl th, .tbl td{ border-bottom:1px solid #ddd; }
+      .ph{ border:1px solid #bbb; color:#444; }
+      .chip, .badge{ border:1px solid #ddd; background:#f7f7f7; color:#111; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <div class="t1">Инвест-проект: 20 домов 99 м² “под ключ”</div>
+        <div class="t2">Домодедовский район • Новое Растуново • ООО «ТехноЛэнд»</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="kbd">←</div><div class="kbd">→</div>
+      <button class="btn" id="btnPrev" title="Предыдущий слайд (←)">⟵ Назад</button>
+      <button class="btn" id="btnNext" title="Следующий слайд (→)">Вперёд ⟶</button>
+      <button class="btn" id="btnMenu" title="Открыть/скрыть меню">☰ Меню</button>
+      <button class="btn" id="btnPrint" title="Печать / Сохранить как PDF">🖨️ PDF</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <aside class="side" id="sidebar">
+      <h3>Слайды</h3>
+      <nav class="nav" id="nav"></nav>
+
+      <h3 style="margin-top:16px;">Материалы</h3>
+      <div class="note">
+        <div class="muted" style="font-weight:800;margin-bottom:6px;">Ссылка на участки</div>
+        <div style="word-break:break-word;">
+          zemexx.ru/zemelnye-uchastki/kashirskoe-shosse/novoe-rastunovo-/
+        </div>
+        <div class="muted" style="margin-top:10px;">
+          *Изображения/рендеры/фото вставишь позже — в презентации есть плейсхолдеры.
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="slide" id="slide"></section>
+
+      <div class="progress" aria-label="progress">
+        <div class="bar" id="bar"></div>
+      </div>
+      <div class="meta">
+        <div id="counter">Слайд 1/1</div>
+        <div class="muted">Управление: ← → • Меню: M • Печать/PDF: P</div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const money = (n) => {
+      try{
+        return new Intl.NumberFormat("ru-RU").format(n) + " ₽";
+      }catch(e){
+        return n + " ₽";
+      }
+    };
+
+    const data = {
+      projectName: "Мини-посёлок из 20 домов 99 м² “под ключ”",
+      location: "Домодедовский район, Новое Растуново (Каширское шоссе)",
+      developer: "ООО «ТехноЛэнд», в лице Лапоноговой Екатерины Николаевны",
+      product: "Одноэтажный каркасный дом 99 м² с коммуникациями и отделкой",
+      timeline: "5–6 месяцев тёплый контур + 1–2 месяца отделка (цикл 6–8 месяцев)",
+      stagePlan: "4 очереди по 5 домов с параллельными продажами",
+      offer: "Дом ~100 м² в Подмосковье по цене студии в Москве • ~30 минут от Москвы • Заезжай и живи",
+      costs: [
+        ["Участок", 1900000],
+        ["Подключение электричества", 90000],
+        ["Септик", 250000],
+        ["Скважина", 350000],
+        ["Забор", 100000],
+        ["Минимальное благоустройство", 100000],
+        ["Дом 99 м² (строительство/коробка)", 4000000],
+        ["Инженерия + приборы/розетки/свет", 1600000],
+        ["Внутренняя отделка (кварц-винил, MDF, натяжные, плитка, двери и т.д.)", 1800000],
+        ["Мебель (кухня/диван/спальня)", 50000],
+      ],
+      totalDirect: 10240000,
+      add: [
+        ["Риэлтор", 350000],
+        ["Налог", 640000],
+      ],
+      totalCost: 11230000,
+      profit: 4450000,
+      price: 15680000,
+      qty: 20,
+    };
+
+    const revenue = data.price * data.qty;
+    const totalCostProj = data.totalCost * data.qty;
+    const profitProj = data.profit * data.qty;
+
+    const slides = [
+      {
+        title: "1. Коротко о проекте",
+        html: `
+          <h1>${data.projectName}</h1>
+          <p class="muted">${data.location}</p>
+          <div class="chips">
+            <span class="chip">20 участков</span>
+            <span class="chip">20 домов 1 этаж</span>
+            <span class="chip">99 м²</span>
+            <span class="chip">Под ключ</span>
+            <span class="chip">Семейная ипотека + наличные</span>
+          </div>
+
+          <div class="hero">
+            <div>
+              <p>
+                Мы предлагаем инвест-проект строительства и продажи <b>20 типовых каркасных домов</b>
+                для молодой семьи. Формат — <b>готовое домовладение</b>: участок + дом + инженерия + отделка
+                с понятной ценой и понятными сроками.
+              </p>
+
+              <p class="note">
+                <span class="badge"><span class="dot"></span> Оффер</span>
+                <b>${data.offer}</b>
+              </p>
+
+              <p class="muted"><b>Застройщик:</b> ${data.developer}</p>
+            </div>
+            <div>
+              <img src="hero.jpg" alt="Визуализация фасада дома" style="width:100%; border-radius:16px; object-fit:cover;">
+            </div>
+          </div>
+        `
+      },
+      {
+        title: "2. Для кого и почему купят",
+        html: `
+          <h2>Целевая аудитория и триггеры покупки</h2>
+          <div class="grid">
+            <div class="card">
+              <h4>Покупатель</h4>
+              <ul class="list">
+                <li>Молодая семья (1–2 ребёнка), устала от аренды и “человейников”</li>
+                <li>Покупка через семейную ипотеку или наличный расчёт</li>
+                <li>Нужен реальный дом, а не стройка на годы</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>Почему выберут нас</h4>
+              <ul class="list">
+                <li><b>Готово под ключ</b>: коммуникации + отделка + минимум по участку</li>
+                <li><b>Сравнимо с бюджетом “студии”</b>, но площадь в 3–4 раза больше</li>
+                <li>Понятные сроки: <b>${data.timeline}</b></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="note">
+            <b>Сообщение рекламы:</b> “Покупка без стресса: приехал — посмотрел — оформил ипотеку — получил ключи”.
+          </div>
+
+          <div style="margin-top:14px;">
+            <img src="side.jpg" alt="Вид дома с другого ракурса" style="width:100%; border-radius:16px; object-fit:cover;">
+          </div>
+        `
+      },
+      {
+        title: "3. Продукт: что входит в “под ключ”",
+        html: `
+          <h2>Комплектация одного домовладения</h2>
+          <p class="muted">Один понятный пакет без “скрытых доплат”, чтобы закрыть страхи покупателя.</p>
+
+          <div class="grid">
+            <div class="card">
+              <h4>Инженерия и коммуникации</h4>
+              <ul class="list">
+                <li>Септик</li>
+                <li>Скважина</li>
+                <li>Подключение электричества</li>
+                <li>Отопление: тёплые полы</li>
+                <li>Сантехника, канализация, вентиляция</li>
+                <li>Приборы и базовая электрофурнитура (розетки/выключатели/лампы)</li>
+              </ul>
+            </div>
+
+            <div class="card">
+              <h4>Внутренняя отделка</h4>
+              <ul class="list">
+                <li>Полы: кварц-винил</li>
+                <li>Стены: MDF-панели</li>
+                <li>Потолки: натяжные</li>
+                <li>Санузел: плитка</li>
+                <li>Плинтуса + комплект дверей</li>
+              </ul>
+            </div>
+
+            <div class="card" style="grid-column:span 12;">
+              <h4>Участок</h4>
+              <ul class="list">
+                <li>Забор</li>
+                <li>Минимальное благоустройство (базовая подготовка участка)</li>
+                <li>Мебель “старт” (кухня/диван/спальня) как ускоритель продажи</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="ph" style="margin-top:14px;">
+            Место для “инфографики комплектации”
+            <small>иконки: септик / скважина / электрика / тёплый пол / отделка</small>
+          </div>
+        `
+      },
+
+      // Новый слайд с планировкой дома
+      {
+        title: "4. Планировка дома",
+        html: `
+          <h2>Планировка дома 99&nbsp;м²</h2>
+          <div class="hero">
+            <div>
+              <p>
+                Проект дома предусматривает комфортную планировку для семьи: просторная кухня‑гостиная, две спальни, санузел, техпомещение и веранда.
+              </p>
+              <ul class="list">
+                <li>Кухня‑гостиная — центр семьи</li>
+                <li>Две спальни (для родителей и ребёнка)</li>
+                <li>Санузел и котельная/техпомещение</li>
+                <li>Прихожая и веранда</li>
+              </ul>
+            </div>
+            <div>
+              <img src="plan.png" alt="Планировка дома 99 м²" style="width:100%; border-radius:16px; object-fit:contain; background:var(--card);">
+            </div>
+          </div>
+        `
+      },
+      {
+        title: "5. Финансовая модель: 1 объект",
+        html: `
+          <h2>Экономика одного домовладения</h2>
+          <div class="kpi">
+            <div class="box">
+              <div class="v">${money(data.price)}</div>
+              <div class="l">Цена продажи “под ключ”</div>
+            </div>
+            <div class="box">
+              <div class="v">${money(data.totalCost)}</div>
+              <div class="l">Себестоимость (включая риэлтора и налог)</div>
+            </div>
+            <div class="box">
+              <div class="v">${money(data.profit)}</div>
+              <div class="l">Плановая прибыль</div>
+            </div>
+            <div class="box">
+              <div class="v">${Math.round((data.profit / data.price) * 100)}%</div>
+              <div class="l">Маржа от цены продажи</div>
+            </div>
+          </div>
+
+          <table class="tbl" aria-label="Смета 1 объекта">
+            <thead>
+              <tr>
+                <th>Статья</th>
+                <th class="right">Сумма</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${data.costs.map(([k,v]) => `
+                <tr>
+                  <td>${k}</td>
+                  <td class="right">${money(v)}</td>
+                </tr>
+              `).join("")}
+              <tr>
+                <td><b>Итого прямые затраты</b></td>
+                <td class="right"><b>${money(data.totalDirect)}</b></td>
+              </tr>
+              ${data.add.map(([k,v]) => `
+                <tr>
+                  <td>${k}</td>
+                  <td class="right">${money(v)}</td>
+                </tr>
+              `).join("")}
+              <tr>
+                <td><b>Себестоимость</b></td>
+                <td class="right"><b>${money(data.totalCost)}</b></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="note">
+            <b>Позиция для инвестора:</b> цифры прозрачные и собираются в понятный пакет “участок + дом + инженерия + отделка”. Средний цикл строительства и продажи одного объекта — <b>6–8&nbsp;месяцев</b>.
+          </div>
+        `
+      },
+      {
+        title: "6. Финансовая модель: 20 домов",
+        html: `
+          <h2>Экономика проекта целиком (20 объектов)</h2>
+          <div class="kpi">
+            <div class="box">
+              <div class="v">${money(revenue)}</div>
+              <div class="l">Плановая выручка</div>
+            </div>
+            <div class="box">
+              <div class="v">${money(totalCostProj)}</div>
+              <div class="l">Суммарная себестоимость</div>
+            </div>
+            <div class="box">
+              <div class="v">${money(profitProj)}</div>
+              <div class="l">Плановая прибыль</div>
+            </div>
+            <div class="box">
+              <div class="v">${data.qty}</div>
+              <div class="l">Кол-во домов</div>
+            </div>
+          </div>
+
+          <table class="tbl" aria-label="Итоги по проекту">
+            <thead>
+              <tr>
+                <th>Показатель</th>
+                <th class="right">Значение</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Цена продажи 1 объекта</td><td class="right">${money(data.price)}</td></tr>
+              <tr><td>Себестоимость 1 объекта</td><td class="right">${money(data.totalCost)}</td></tr>
+              <tr><td>Прибыль 1 объекта</td><td class="right">${money(data.profit)}</td></tr>
+              <tr><td><b>Выручка 20 объектов</b></td><td class="right"><b>${money(revenue)}</b></td></tr>
+              <tr><td><b>Себестоимость 20 объектов</b></td><td class="right"><b>${money(totalCostProj)}</b></td></tr>
+              <tr><td><b>Прибыль 20 объектов</b></td><td class="right"><b>${money(profitProj)}</b></td></tr>
+            </tbody>
+          </table>
+
+          <div style="margin-top:14px;">
+            <img src="deco1.png" alt="Абстрактная диаграмма" style="width:100%; border-radius:16px; object-fit:cover;">
+          </div>
+        `
+      },
+      {
+        title: "7. Производство и график (по очередям)",
+        html: `
+          <h2>Как строим быстро и без заморозки денег</h2>
+          <p>
+            Производственный план строится на повторяемом типовом доме и запуске <b>очередями по 5 домов</b>.
+            Это позволяет одновременно <b>строить и продавать</b>, сокращая кассовые разрывы.
+          </p>
+
+          <div class="grid">
+            <div class="card">
+              <h4>Сроки по циклу</h4>
+              <ul class="list">
+                <li><b>Тёплый контур:</b> 5–6 месяцев</li>
+                <li><b>Отделка:</b> 1–2 месяца</li>
+                <li><b>Итог:</b> дом “под ключ” — в пределах 6–8 месяцев</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>Очередность</h4>
+              <ul class="list">
+                <li>Этап 1: 5 домов → старт продаж и сделок</li>
+                <li>Этап 2: ещё 5 домов параллельно продажам 1 этапа</li>
+                <li>Этап 3: повторяем</li>
+                <li>Этап 4: финальная пятёрка</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="note">
+            <b>Смысл модели:</b> не строить сразу 20 и ждать — а постоянно возвращать капитал через продажи очередей.
+          </div>
+
+          <div style="margin-top:14px;">
+            <img src="deco2.png" alt="Абстрактный таймлайн" style="width:100%; border-radius:16px; object-fit:cover;">
+          </div>
+        `
+      },
+      {
+        title: "8. Маркетинг и продажи",
+        html: `
+          <h2>Маркетинговая стратегия: продаём в процессе строительства</h2>
+
+          <p class="note">
+            <b>Главный тезис:</b> ${data.offer}
+          </p>
+
+          <div class="grid">
+            <div class="card">
+              <h4>Каналы</h4>
+              <ul class="list">
+                <li>Агрегаторы недвижимости + площадки объявлений</li>
+                <li>Таргет по запросам “семейная ипотека / дом под ключ / Домодедово”</li>
+                <li>Партнёрства: ипотечные брокеры, агентства, локальные сообщества</li>
+                <li>Контент: короткие видео “как строим / этапы / качество”</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>Конверсия</h4>
+              <ul class="list">
+                <li>1 шоу-дом (или 1 “показательный” объект в 1 очереди)</li>
+                <li>Пакет документов под ипотеку + сопровождение сделки</li>
+                <li>Акции не по цене, а по ценности: “кухня/теплый пол/забор в подарок”</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="ph" style="margin-top:14px;">
+            Место для “баннеров”
+            <small>3–5 вариантов рекламных креативов (ты сделаешь картинки)</small>
+          </div>
+        `
+      },
+      {
+        title: "9. Риски и управление качеством",
+        html: `
+          <h2>Риски — и как мы их закрываем</h2>
+          <div class="grid">
+            <div class="card">
+              <h4>Сроки и подрядчики</h4>
+              <ul class="list">
+                <li>Типовой проект + повторяемые узлы</li>
+                <li>Параллельная работа по этапам (5 домов)</li>
+                <li>Поэтапная приёмка работ, чек-листы</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>Материалы и цены</h4>
+              <ul class="list">
+                <li>Закупка под очередь заранее</li>
+                <li>Фиксация ключевых позиций</li>
+                <li>Альтернативные поставщики</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>Спрос и продажи</h4>
+              <ul class="list">
+                <li>Упор на семейную ипотеку + наличные покупатели</li>
+                <li>Гибкие бонусы в комплектации вместо скидок</li>
+                <li>Усиление партнёрской сети</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>Репутация и гарантия</h4>
+              <ul class="list">
+                <li>Регламент качества и фотофиксация этапов</li>
+                <li>Понятная гарантийная политика</li>
+                <li>Сервис после сделки (мелкие доработки)</li>
+              </ul>
+            </div>
+          </div>
+        `
+      },
+      {
+        title: "10. Предложение инвестору",
+        html: `
+          <h2>Форматы участия инвестора</h2>
+          <p class="muted">Можно выбрать модель под комфорт инвестора и скорость оборота средств.</p>
+
+          <div class="grid">
+            <div class="card">
+              <h4>Вариант A — Финансирование оборота</h4>
+              <ul class="list">
+                <li>Инвестор финансирует запуск/очередь</li>
+                <li>Возврат по мере продаж</li>
+                <li>Доход: фиксированный процент + бонус за досрочное закрытие</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>Вариант B — Доля в прибыли по объектам</h4>
+              <ul class="list">
+                <li>Инвестор участвует в финансировании очередей</li>
+                <li>Получает % прибыли с каждой продажи до возврата тела + доход</li>
+                <li>Прозрачный контроль: объект-за-объектом</li>
+              </ul>
+            </div>
+            <div class="card" style="grid-column:span 12;">
+              <h4>Вариант C — Партнёрство на весь проект</h4>
+              <ul class="list">
+                <li>Совместная модель на 20 домов</li>
+                <li>Роли: инвестор — капитал, застройщик — стройка/продажи</li>
+                <li>Разделение прибыли по долям, закреплённым договором</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="note">
+            <b>Главное:</b> модель очередей делает проект управляемым — деньги не “лежат”, а работают и возвращаются продажами.
+          </div>
+        `
+      },
+      {
+        title: "11. Что передаём инвестору (пакет документов)",
+        html: `
+          <h2>Инвест-пакет проекта</h2>
+          <div class="grid">
+            <div class="card">
+              <h4>Финансовые материалы</h4>
+              <ul class="list">
+                <li>Смета 1 объекта и 20 объектов</li>
+                <li>График затрат и поступлений по очередям</li>
+                <li>План продаж и медиаплан</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>Техническая часть</h4>
+              <ul class="list">
+                <li>Планировки / визуализации / описание комплектации</li>
+                <li>Регламент качества и контроль этапов</li>
+                <li>Гарантийный блок</li>
+              </ul>
+            </div>
+            <div class="card" style="grid-column:span 12;">
+              <h4>Следующий шаг</h4>
+              <ul class="list">
+                <li>Согласовать формат инвестирования (A/B/C)</li>
+                <li>Зафиксировать график финансирования под 1 очередь (5 домов)</li>
+                <li>Старт строительства + запуск рекламы и продаж</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="margin-top:14px;">
+            <img src="hero.jpg" alt="Визуализация проекта" style="width:100%; border-radius:16px; object-fit:cover;">
+          </div>
+        `
+      },
+    ];
+
+    const nav = document.getElementById("nav");
+    const slideEl = document.getElementById("slide");
+    const bar = document.getElementById("bar");
+    const counter = document.getElementById("counter");
+    const sidebar = document.getElementById("sidebar");
+
+    let idx = 0;
+
+    function renderNav(){
+      nav.innerHTML = slides.map((s, i) => `
+        <a href="#${i}" data-i="${i}" class="${i===idx ? "active" : ""}">
+          <span class="idx">${String(i+1).padStart(2,"0")}</span>
+          <span class="ttl">${s.title.replace(/^\d+\.\s*/, "")}</span>
+        </a>
+      `).join("");
+      nav.querySelectorAll("a").forEach(a => {
+        a.addEventListener("click", (e) => {
+          e.preventDefault();
+          const i = Number(a.dataset.i);
+          go(i);
+        });
+      });
+    }
+
+    function render(){
+      slideEl.innerHTML = slides[idx].html;
+      renderNav();
+      const pct = ((idx+1)/slides.length)*100;
+      bar.style.width = pct + "%";
+      counter.textContent = `Слайд ${idx+1}/${slides.length}`;
+      window.location.hash = String(idx);
+    }
+
+    function go(i){
+      idx = Math.max(0, Math.min(slides.length-1, i));
+      render();
+    }
+
+    function next(){ go(idx+1); }
+    function prev(){ go(idx-1); }
+
+    document.getElementById("btnNext").addEventListener("click", next);
+    document.getElementById("btnPrev").addEventListener("click", prev);
+    document.getElementById("btnMenu").addEventListener("click", () => {
+      sidebar.style.display = (sidebar.style.display === "none") ? "" : "none";
+    });
+    document.getElementById("btnPrint").addEventListener("click", () => window.print());
+
+    window.addEventListener("keydown", (e) => {
+      if(e.key === "ArrowRight") next();
+      if(e.key === "ArrowLeft") prev();
+      if(e.key.toLowerCase() === "m"){
+        sidebar.style.display = (sidebar.style.display === "none") ? "" : "none";
+      }
+      if(e.key.toLowerCase() === "p"){
+        window.print();
+      }
+    });
+
+    // Start from hash if present
+    const start = Number((window.location.hash || "").replace("#",""));
+    if(!Number.isNaN(start) && start >= 0 && start < slides.length){
+      idx = start;
+    }
+    render();
+  </script>
+</body>
+</html>
